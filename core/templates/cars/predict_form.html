@@ -1,0 +1,102 @@
+{% extends "core/navbar.html" %}
+{% block content %}
+{% load widget_tweaks %}
+<body>
+    <section class="w-4/6 p-10 mx-auto space-y-4 my-auto bg-sky-200 rounded-md shadow-lg dark:bg-white mb-25 mt-25">
+    <h1 class="text-5xl font-bold text-zinc-800 capitalize dark:text-zinc-800">Car Price Prediction Form</h1>
+    <h1 class="text-3xl text-zinc-800 capitalize dark:text-zinc-800">Please fill in the form in with your car data to estimate the price that it would cost!</h1>
+    {% if form.errors %}
+        {% render_field form.errors %}
+    {% endif %}
+    <form action="{% url 'cars:create_prediction'%}" method="POST">
+        {% csrf_token %}
+        <div class="grid grid-cols-1 gap-12 mt-10 sm:grid-cols-3">
+            <div>
+                <label class="text-2xl text-black dark:text-black font-bold">Marka</label>
+                {% render_field form.brand name="brand" id="brand" placeholder="Wprowadź markę samochodu" class="block w-full px-4 py-2 mt-2 text-black text-xl bg-white border border-gray-300 rounded-md dark:bg-gray-100 dark:text-black dark:border-gray-50  focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring" %}
+            </div>
+
+            <div>
+                <label class="text-2xl text-black dark:text-black font-bold">Model</label>
+               {% render_field form.model name="model" id="brand" placeholder="Wprowadź model samochodu" class="block w-full px-4 py-2 mt-2 text-black text-xl bg-white border border-gray-300 rounded-md dark:bg-gray-100 dark:text-black dark:border-gray-50  focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring" %}
+            </div>
+
+            <div>
+                <label class="text-2xl text-black dark:text-black font-bold">Wersja</label>
+                {% render_field form.version name="version" id="version" placeholder="Wprowadź wersję samochodu" class="block w-full px-4 py-2 mt-2 text-black text-xl bg-white border border-gray-300 rounded-md dark:bg-gray-100 dark:text-black dark:border-gray-50  focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring" %}
+            </div>
+            <div>
+                <label class="text-2xl text-black dark:text-black font-bold">Rok produkcji</label>
+                {% render_field form.year name="year" id="year" placeholder="Wprowadź rok produkcji samochodu" class="block w-full px-4 py-2 mt-2 text-black text-xl bg-white border border-gray-300 rounded-md dark:bg-gray-100 dark:text-black dark:border-gray-50  focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring" %}
+            </div>
+            <div>
+                <label class="text-2xl text-black dark:text-black font-bold">Przebieg</label>
+                {% render_field form.mileage name="mileage" id="mileage" placeholder="Wprowadź przebieg [km]" class="block w-full px-4 py-2 mt-2 text-black text-xl bg-white border border-gray-300 rounded-md dark:bg-gray-100 dark:text-black dark:border-gray-50  focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring" %}
+            </div>
+            <div>
+                <label class="text-2xl text-black dark:text-black font-bold">Pojemność skokowa</label>
+                {% render_field form.displacement name="displacement" id="displacement" placeholder="Wprowadź pojemność skokową [cm3]" class="block w-full px-4 py-2 mt-2 text-black text-xl bg-white border border-gray-300 rounded-md dark:bg-gray-100 dark:text-black dark:border-gray-50  focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring" %}
+            </div>
+            <div>
+                <label class="text-2xl text-black dark:text-black font-bold">Moc</label>
+                {% render_field form.power name="power" id="power" placeholder="Wprowadź moc [HP]" class="block w-full px-4 py-2 mt-2 text-black text-xl bg-white border border-gray-300 rounded-md dark:bg-gray-100 dark:text-black dark:border-gray-50  focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring" %}
+            </div>
+
+            <div>
+                <label class="text-2xl text-black dark:text-black font-bold">Rodzaj paliwa</label>
+                {% render_field form.fuel_type name="fuel_type" id="fuel_type" placeholder="Wprowadź rodzaj paliwa" class="block w-full px-4 py-2 mt-2 text-black text-xl bg-white border border-gray-300 rounded-md dark:bg-gray-100 dark:text-black dark:border-gray-50  focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring" %}
+            </div>
+            <div>
+                <label class="text-2xl text-black dark:text-black font-bold">Skrzynia biegów</label>
+                {% render_field form.gearbox name="gearbox" id="gearbox" placeholder="Wprowadź rodzaj skrzyni biegów" class="block w-full px-4 py-2 mt-2 text-black text-xl bg-white border border-gray-300 rounded-md dark:bg-gray-100 dark:text-black dark:border-gray-50  focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring" %}
+            </div>
+            <div>
+                <label class="text-2xl text-black dark:text-black font-bold">Napęd</label>
+                {% render_field form.propulsion name="propulsion" id="propulsion" placeholder="Wprowadź rodzaj napędu" class="block w-full px-4 py-2 mt-2 text-black text-xl bg-white border border-gray-300 rounded-md dark:bg-gray-100 dark:text-black dark:border-gray-50  focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring" %}
+            </div>
+            <div>
+                <label class="text-2xl text-black dark:text-black font-bold">Kolor</label>
+                {% render_field form.color name="color" id="color" placeholder="Wprowadź kolor samochodu" class="block w-full px-4 py-2 mt-2 text-black text-xl bg-white border border-gray-300 rounded-md dark:bg-gray-100 dark:text-black dark:border-gray-50  focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring" %}
+            </div>
+            <div>
+                <label class="text-2xl text-black dark:text-black font-bold">Czy auto jest bezwypadkowe?</label>
+                <div class='flex flex-row'>
+                {% render_field form.is_accident_free name="is_accident_free" id="is_accident_free" placeholder="Is your car accident free?" class="block py-2 mt-5 appearance-none h-6 w-6 bg-gray-400 rounded-full checked:bg-green-300 checked:scale-75 transition-all duration-200 peer" %}
+		        <label class='mt-4 flex flex-col justify-center px-2 peer-checked:text-green-400 text-2xl font-bold select-none'>Bezwypadkowy</label>
+                </div>
+            </div>
+            <div>
+                <label class="text-2xl text-black dark:text-black font-bold">Stan</label>
+                {% render_field form.condition name="condition" id="condition" placeholder="Wprowadź stan samochodu" class="block w-full px-4 py-2 mt-2 text-black text-xl bg-white border border-gray-300 rounded-md dark:bg-gray-100 dark:text-black dark:border-gray-50  focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring" %}
+            </div>
+        </div>
+
+        <div class="my-4 flex items-center justify-end space-x-4">
+            <button type="submit" class="bg-zinc-600 hover:bg-zinc-900 rounded-lg px-8 py-2 text-gray-100 hover:shadow-xl transition duration-150 uppercase">Zapisz</button>
+        </div>
+    </form>
+</section>
+
+
+    <div class='flex flex-wrap flex-row sm:flex-col justify-center items-center w-full sm:w-1/5 p-5 bg-white rounded-md shadow-xl border-l-4 border-green-300'>
+
+		<div class="space-y-5">
+            <div class="font-bold text-2xl text-center">
+				Przybliżona cena
+			</div>
+            {% if car_price %}
+            <div class="font-bold text-5xl text-center bg-green-200 text-green-800 rounded-full border-8 border-green-200">
+                {{ car_price }} PLN
+			</div>
+            {% else %}
+			<div class="font-bold text-5xl text-center bg-green-200 text-green-800 rounded-full border-8 border-green-200">
+				1234567 PLN
+			</div>
+            {% endif %}
+
+
+		</div>
+	</div>
+
+</body>
+{% endblock content %}

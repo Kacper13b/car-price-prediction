@@ -1,0 +1,107 @@
+{% extends "core/navbar.html" %}
+{% block content %}
+<body>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Loopple/loopple-public-assets@main/riva-dashboard-tailwind/riva-dashboard.css">
+<div class="flex flex-wrap mx-auto my-auto">
+  <div class="w-screen h-full px-3 mb-6  mx-auto ">
+    <div class="relative flex-[1_auto] flex flex-col break-words min-w-0 bg-clip-border rounded-[.95rem] bg-white m-5">
+      <div class="relative flex flex-col min-w-0 break-words border border-dashed bg-clip-border rounded-2xl border-stone-200 bg-light/30">
+        <!-- card header -->
+        <div class="px-9 pt-5 flex justify-between items-stretch flex-wrap min-h-[70px] pb-0 bg-transparent">
+          <h3 class="flex flex-col items-start justify-center m-2 ml-0 font-medium text-dark">
+            <span class="mr-3 font-semibold text-dark text-4xl">Stworzone predykcje samochodów</span>
+            <span class="mt-1 font-medium text-secondary-dark text-xl">Twoje wszystkie predykcje wraz z wykorzystanymi parametrami znajdują się poniżej</span>
+          </h3>
+        </div>
+        <!-- end card header -->
+        <!-- card body  -->
+        <div class="flex-auto block py-8 pt-6 px-9">
+          <div class="overflow-x-auto">
+            <table class="w-full my-0 align-middle text-dark text-2xl border-neutral-200">
+              <thead class="align-bottom">
+                <tr class="font-semibold text-2xl text-secondary-dark">
+                  <th class="pb-3 text-center min-w-1/14">Nr.</th>
+                  <th class="pb-3 text-center min-w-1/14">Marka</th>
+                  <th class="pb-3 text-center min-w-1/14">Model</th>
+                  <th class="pb-3 text-center min-w-1/14">Wersja</th>
+                  <th class="pb-3 text-center min-w-1/14">Rok produkcji</th>
+                  <th class="pb-3 text-center min-w-1/14">Przebieg</th>
+                  <th class="pb-3 text-center min-w-1/14">Pojemność skokowa</th>
+                  <th class="pb-3 text-center min-w-1/14">Moc</th>
+                  <th class="pb-3 text-center min-w-1/14">Rodzaj paliwa</th>
+                  <th class="pb-3 text-center min-w-1/14">Skrzynia biegów</th>
+                  <th class="pb-3 text-center min-w-1/14">Napęd</th>
+                  <th class="pb-3 text-center min-w-1/14">Kolor</th>
+                  <th class="pb-3 text-center min-w-1/14">Bezwypadkowy</th>
+                  <th class="pb-3 text-center min-w-1/14">Stan</th>
+                  <th class="pb-3 text-center min-w-1/14">Cena</th>
+                </tr>
+              </thead>
+              <tbody>
+              {% for car in object_list %}
+              <tr class="border-b border-dashed last:border-b-0">
+                  <td class="p-3 pr-0 text-center">
+                    <span class="font-semibold text-light-inverse text-md/normal">{{ car.id }}</span>
+                  </td>
+                  <td class="p-3 pr-0 text-center">
+                    <span class="font-semibold text-light-inverse text-md/normal">{{ car.brand }}</span>
+                  </td>
+                  <td class="p-3 pr-0 text-center">
+                    <span class="font-semibold text-light-inverse text-md/normal">{{ car.model }}</span>
+                  </td>
+                  <td class="p-3 pr-0 text-center">
+                    <span class="font-semibold text-light-inverse text-md/normal">{{ car.version }}</span>
+                  </td>
+                  <td class="p-3 pr-0 text-center">
+                    <span class="font-semibold text-light-inverse text-md/normal">{{ car.year }}</span>
+                  </td>
+                  <td class="p-3 pr-0 text-center">
+                    <span class="font-semibold text-light-inverse text-md/normal">{{ car.mileage }}</span>
+                  </td>
+                  <td class="p-3 pr-0 text-center">
+                    <span class="font-semibold text-light-inverse text-md/normal">{{ car.displacement }}</span>
+                  </td>
+                  <td class="p-3 pr-0 text-center">
+                    <span class="font-semibold text-light-inverse text-md/normal">{{ car.power }}</span>
+                  </td>
+                  <td class="p-3 pr-0 text-center">
+                    <span class="font-semibold text-light-inverse text-md/normal">{{ car.fuel_type }}</span>
+                  </td>
+                  <td class="p-3 pr-0 text-center">
+                    <span class="font-semibold text-light-inverse text-md/normal">{{ car.gearbox }}</span>
+                  </td>
+                  <td class="p-3 pr-0 text-center">
+                    <span class="font-semibold text-light-inverse text-md/normal">{{ car.propulsion }}</span>
+                  </td>
+                  <td class="p-3 pr-0 text-center">
+                    <span class="font-semibold text-light-inverse text-md/normal">{{ car.color }}</span>
+                  </td>
+                  <td class="p-3 pr-0 text-center">
+                    <span class="font-semibold text-light-inverse text-md/normal">{{ car.is_accident_free }}</span>
+                  </td>
+                  <td class="p-3 pr-0 text-center">
+                    <span class="font-semibold text-light-inverse text-md/normal">{{ car.condition }}</span>
+                  </td>
+                  <td class="p-3 pr-0 text-center text-green-600">
+                    <span class="font-semibold text-light-inverse text-md/normal">{{ car.price }}</span>
+                  </td>
+                  <td class="p-3 pr-0 text-end text-red-600">
+                    <a href="{% url 'cars:delete_car' pk=car.id %}" class="font-semibold text-light-inverse text-md/normal">
+                        <svg class="mr-2" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M19 24h-14c-1.104 0-2-.896-2-2v-17h-1v-2h6v-1.5c0-.827.673-1.5 1.5-1.5h5c.825 0 1.5.671 1.5 1.5v1.5h6v2h-1v17c0 1.104-.896 2-2 2zm0-19h-14v16.5c0 .276.224.5.5.5h13c.276 0 .5-.224.5-.5v-16.5zm-7 7.586l3.293-3.293 1.414 1.414-3.293 3.293 3.293 3.293-1.414 1.414-3.293-3.293-3.293 3.293-1.414-1.414 3.293-3.293-3.293-3.293 1.414-1.414 3.293 3.293zm2-10.586h-4v1h4v-1z"/></svg>
+                    </a>
+                  </td>
+
+                </tr>
+              {% endfor %}
+
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+{% endblock content %}
